@@ -1,0 +1,69 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.play</groupId>
+		<artifactId>play-parent</artifactId>
+		<version>1.1</version>
+	</parent>
+
+	<groupId>st.happy_camper.play</groupId>
+	<artifactId>play-hello</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Play Hello!</name>
+	<inceptionYear>2010</inceptionYear>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<organization>
+		<name>Happy-Camper Street</name>
+		<url>http://happy-camper.st/</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>ueshin</id>
+			<name>Takuya Ueshin</name>
+			<email>ueshin@happy-camper.st</email>
+			<url>http://ueshin.happy-camper.st/</url>
+			<organization>Happy-Camper Street</organization>
+			<timezone>+9</timezone>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git@github.com:ueshin/play-hello.git</connection>
+		<developerConnection>scm:git:git@github.com:ueshin/play-hello.git</developerConnection>
+		<url>https://github.com/ueshin/play-hello</url>
+	</scm>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<preparationGoals>clean</preparationGoals>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

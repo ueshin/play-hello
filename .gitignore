@@ -1,0 +1,11 @@
+/lib
+/eclipse
+/precompiled
+/target
+/tmp
+/.classpath
+/.ensime
+/.project
+/.scala_dependencies
+/.settings
+*~
