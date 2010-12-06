@@ -1,4 +1,6 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+Welcome #{if user}${user.email}#{/if}#{else}Guest#{/else}!
+
+#{if user}<a href="@{Application.logout}">Logout</a>#{/if}#{else}<a href="@{Application.login}">Login</a>#{/else}
