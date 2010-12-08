@@ -9,7 +9,7 @@
 
 	<groupId>st.happy_camper.play</groupId>
 	<artifactId>play-hello</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>Play Hello!</name>
 	<inceptionYear>2010</inceptionYear>
 
