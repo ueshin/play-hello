@@ -1,6 +1,25 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-Welcome #{if user}${user.email}#{/if}#{else}Guest#{/else}!
+Welcome #{if currentUser}${currentUser.email}#{/if}#{else}Guest#{/else}!
 
-#{if user}<a href="@{Application.logout}">Logout</a>#{/if}#{else}<a href="@{Application.login}">Login</a>#{/else}
+#{if currentUser}<a href="@{Application.logout}">Logout</a>#{/if}#{else}<a href="@{Application.login}">Login</a>#{/else}
+
+#{if currentUser}
+#{form @Application.greet()}
+#{ifErrors}
+<p class="error">
+  ${errors[0]}
+</p>
+#{/ifErrors}
+<p>
+  <label for="message">Message: </label>
+  <textarea name="message" id="message">${params.message}</textarea>
+  <input type="submit" value="Post a greeting" />
+</p>
+#{/form}
+#{/if}
+
+#{list items:greetings, as:'greeting'}
+<p>${greeting.message} : ${greeting.postedAt.format('yyyy/MM/dd HH:mm:ss')}</p>
+#{/list}
