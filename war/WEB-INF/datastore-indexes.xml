@@ -6,4 +6,14 @@
 		<property name="postedAt" direction="desc" />
 	</datastore-index>
 
+	<datastore-index kind="Follow" ancestor="false">
+		<property name="follower" direction="asc" />
+		<property name="followedAt" direction="desc" />
+	</datastore-index>
+
+	<datastore-index kind="Follow" ancestor="false">
+		<property name="following" direction="asc" />
+		<property name="followedAt" direction="desc" />
+	</datastore-index>
+
 </datastore-indexes>

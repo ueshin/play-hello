@@ -9,7 +9,11 @@ import _root_.java.util.{ ArrayList, Date }
 class User (
 
   @NotNull
-  var email: String
+  var email: String,
+
+  var joinedAt: Date = new Date,
+
+  var invitedAt: Date = null
 
 ) extends Model {
 
@@ -17,9 +21,6 @@ class User (
 
   @Id
   var id: Long = _
-
-  @NotNull
-  var joinedAt = new Date
 }
 
 object User {

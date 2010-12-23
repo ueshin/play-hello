@@ -1,0 +1,19 @@
+#{extends 'main.html' /}
+#{set title:'Followings' /}
+
+#{ifErrors}
+<p class="error">
+  ${errors[0]}
+</p>
+#{/ifErrors}
+
+#{form @Application.follow()}
+<p>
+  <input type="text" name="follow" id="follow" value="${params.follow}"/>
+  <input type="submit" value="Follow" />
+</p>
+#{/form}
+
+#{list items:followings, as:'following'}
+<p>${users.get(following).get().email} followed at ${following.followedAt.format('yyyy/MM/dd HH:mm:ss z')}</p>
+#{/list}

@@ -1,17 +1,14 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-Welcome #{if currentUser}${currentUser.email}#{/if}#{else}Guest#{/else}!
-
-#{if currentUser}<a href="@{Application.logout}">Logout</a>#{/if}#{else}<a href="@{Application.login}">Login</a>#{/else}
-
 #{if currentUser}
-#{form @Application.greet()}
 #{ifErrors}
 <p class="error">
   ${errors[0]}
 </p>
 #{/ifErrors}
+
+#{form @Application.greet()}
 <p>
   <label for="message">Message: </label>
   <textarea name="message" id="message">${params.message}</textarea>
@@ -21,5 +18,5 @@ Welcome #{if currentUser}${currentUser.email}#{/if}#{else}Guest#{/else}!
 #{/if}
 
 #{list items:greetings, as:'greeting'}
-<p>${greeting.message} : ${greeting.postedAt.format('yyyy/MM/dd HH:mm:ss')}</p>
+<p>${greeting.message} posted at ${greeting.postedAt.format('yyyy/MM/dd HH:mm:ss z')}</p>
 #{/list}
