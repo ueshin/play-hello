@@ -12,7 +12,10 @@ class Follow (
   var follower: Long,
 
   @NotNull
-  var following: Long
+  var following: Long,
+
+  @NotNull
+  var followedAt: Date = new Date
 
 ) extends Model {
 
@@ -20,9 +23,6 @@ class Follow (
 
   @Id
   var id: Long = _
-
-  @NotNull
-  var followedAt = new Date
 }
 
 object Follow {

@@ -62,13 +62,14 @@ object Application extends Controller with Defaults {
     currentUser match {
       case Some(currentUser) if currentUser.email != follow => {
         if(!Validation.hasErrors) {
+          val now = new Date
           val user = User.get(follow) getOrElse {
-            val user = new User(follow, null, new Date)
+            val user = new User(follow, null, now)
             user.insert
             user
           }
           if(!Follow.followings(currentUser).map(_.following).contains(user.id)) {
-            new Follow(currentUser.id, user.id).insert
+            new Follow(currentUser.id, user.id, now).insert
           }
           Action(Application.followings())
         }
