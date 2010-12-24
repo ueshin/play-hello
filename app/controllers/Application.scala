@@ -50,7 +50,7 @@ object Application extends Controller with Defaults {
   def followings(limit: Int = 20, offset: Int = 0) = {
     currentUser match {
       case Some(currentUser) => {
-        val followings = Follow.followings(currentUser)
+        val followings = Follow.followings(currentUser, limit, offset)
         val users = followings.flatMap(f=> User.get(f.following).map(user=>(f->user))).toMap
         "@followings".asTemplate(followings, users)
       }
