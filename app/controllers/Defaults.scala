@@ -23,7 +23,7 @@ trait Defaults extends Controller {
   @Util
   def currentUser = {
     Option(renderArgs.get("currentUser")) match {
-      case Some(user @ User) => Some(user.asInstanceOf[User])
+      case Some(user: User) => Some(user)
       case _ => Option(GAE.getUser) map {
         gaeUser => User.get(gaeUser.getEmail) match {
           case Some(user) => {
