@@ -17,3 +17,5 @@
 #{list items:followings, as:'following'}
 <p>${users.get(following).get().email} followed at ${following.followedAt.format('yyyy/MM/dd HH:mm:ss z')}</p>
 #{/list}
+
+<p>cached at ${cachedAt.format('yyyy/MM/dd HH:mm:ss z')}</p>

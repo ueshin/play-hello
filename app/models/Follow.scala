@@ -6,6 +6,7 @@ import _root_.scala.collection.JavaConversions._
 
 import _root_.java.util.{ ArrayList, Date }
 
+@serializable
 class Follow (
 
   @NotNull
@@ -29,7 +30,7 @@ object Follow {
 
   private def all = Model.all(classOf[Follow])
 
-  def followings(user: User, limit: Int = 20, offset: Int = 0) = all.filter("follower", user.id).order("-followedAt").fetch(limit, offset).toList
+  def followings(user: User) = all.filter("follower", user.id).order("-followedAt").fetch(Int.MaxValue).toList
 
-  def followers(user: User, limit: Int = 20, offset: Int = 0) = all.filter("following", user.id).order("-followedAt").fetch(limit, offset).toList
+  def followers(user: User) = all.filter("following", user.id).order("-followedAt").fetch(Int.MaxValue).toList
 }

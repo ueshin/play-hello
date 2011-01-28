@@ -6,6 +6,7 @@ import _root_.scala.collection.JavaConversions._
 
 import _root_.java.util.{ ArrayList, Date }
 
+@serializable
 class User (
 
   @NotNull
