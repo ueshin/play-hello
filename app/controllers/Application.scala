@@ -3,6 +3,7 @@ package controllers
 import _root_.models._
 
 import _root_.play._
+import _root_.play.cache._
 import _root_.play.mvc._
 import _root_.play.data.validation._
 import _root_.play.modules.gae._
@@ -35,7 +36,7 @@ object Application extends Controller with Defaults {
       case Some(currentUser) => {
         if(!Validation.hasErrors) {
           val greeting = new Greeting(currentUser.id, message)
-          greeting.followerIds.addAll(currentUser.id :: Follow.followers(currentUser, Int.MaxValue).map(_.follower))
+          greeting.followerIds.addAll(currentUser.id :: Follow.followers(currentUser).map(_.follower))
           greeting.insert
           Action(Application.index())
         }
@@ -50,9 +51,12 @@ object Application extends Controller with Defaults {
   def followings(limit: Int = 20, offset: Int = 0) = {
     currentUser match {
       case Some(currentUser) => {
-        val followings = Follow.followings(currentUser, limit, offset)
-        val users = followings.flatMap(f=> User.get(f.following).map(user=>(f->user))).toMap
-        "@followings".asTemplate(followings, users)
+        val(followings, users, cached) = Cache.get(followingsCacheName(currentUser.email), "10min") {
+          val followings = Follow.followings(currentUser)
+          val users = followings.flatMap(f=> User.get(f.following).map(user=>(f->user))).toMap
+          (followings, users, new Date)
+        }
+        "@followings".asTemplate(followings.take(limit+offset).takeRight(limit), users, cached)
       }
       case None => Action(Application.index())
     }
@@ -70,6 +74,7 @@ object Application extends Controller with Defaults {
           }
           if(!Follow.followings(currentUser).map(_.following).contains(user.id)) {
             new Follow(currentUser.id, user.id, now).insert
+            Cache.delete(followingsCacheName(currentUser.email))
           }
           Action(Application.followings())
         }
@@ -80,4 +85,6 @@ object Application extends Controller with Defaults {
       case _ => Action(Application.followings())
     }
   }
+
+  private def followingsCacheName(email: String) = "followings_of_%s".format(email)
 }
